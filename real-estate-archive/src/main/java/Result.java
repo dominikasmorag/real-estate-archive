@@ -1,5 +1,3 @@
-import org.jsoup.select.Elements;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -23,6 +21,29 @@ public class Result {
     void setDate(Date date) { this.date = date; }
     void setDuration(long duration) { this.duration = duration; }
     void setId(int id) { this.id = id; }
+
+    String getTitle() {
+        return title;
+    }
+    String getLocation() {
+        return location;
+    }
+    BigDecimal getPrice() {
+        return price;
+    }
+    int getRooms() {
+        return rooms;
+    }
+    float getSquareMeters() {
+        return squareMeters;
+    }
+    String getImage() {
+        return image;
+    }
+
+    Date getDate() {
+        return date;
+    }
 
     public String toString() {
         return "Id: " + id + "\nTitle: " + title + "\nLocation: " + location + "\nPrice: " + price + "\nRooms: " + rooms + "\nSquare meters: " + squareMeters + "\nImage: " + image + "\nDate: " + date +"\nDuration[ms]: " + duration +"\n====";

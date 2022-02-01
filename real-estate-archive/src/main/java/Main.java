@@ -1,24 +1,38 @@
+import org.h2.jdbcx.JdbcDataSource;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.UUID;
 
 public class Main {
 
     static final String BASIC_URL = "https://www.otodom.pl/pl/oferty/sprzedaz/mieszkanie/katowice?priceMin=300000&priceMax=480000&roomsNumber=%5BTHREE%5D&PAGE=11&limit=50&page=";
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws SQLException, IOException {
+        JdbcDataSource ds = new JdbcDataSource();
+        ds.setUrl("jdbc:h2:/C:/Users/domin/Desktop/h2o/h2owy/realestate.db;DB_CLOSE_ON_EXIT=FALSE");
+        ds.setUser("sa");
+        ds.setPassword("sa");
+
+
+            Connection conn = ds.getConnection();
+
+        try {
+            DataBase.createSchema(conn);
+        } catch (Exception ex) {
+            System.out.println("This database already exists!");
+        }
+
+
+
         int id = 1;
-        int withoutPrice = 0;
         long durationSum = 0;
         ArrayList<Result> list = new ArrayList<>();
 
@@ -57,7 +71,6 @@ public class Main {
                 price = price.replaceAll(",", ".");
                 if (price.equalsIgnoreCase("zapytaj o cenę") || price.equalsIgnoreCase("zapytajocenę")) {
                     price = "0";
-                    withoutPrice++;
                 }
 
                 rooms = e.select("span").get(1).text();
@@ -104,6 +117,9 @@ public class Main {
                     id++;
 
                     list.add(result);
+
+                    DataBase.addValues(conn, result);
+
                 }
             } catch(Exception ex) {
                    System.out.println("ex.getMessage() = " + ex.getMessage());
@@ -111,11 +127,11 @@ public class Main {
                 }
             }
         }
-        System.out.println("Results in general: " + (id + withoutPrice));
-        System.out.println("Without price: " + withoutPrice);
-        System.out.println("List size: " + list.size());
-        System.out.println("last id: " +id);
-        System.out.println(list.get(id-2));
+        conn.close();
+    }
+
+    public static void insertData(Connection conn) throws SQLException {
 
     }
+
 }
