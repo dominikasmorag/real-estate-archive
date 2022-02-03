@@ -6,18 +6,20 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.UUID;
 
 public class Main {
 
+    PreparedStatement addValues = null;
+    static final String INSERT_INTO = "INSERT INTO RESULTS(TITLE, LOCATION, PRICE, ROOMS, SQUAREMETERS, IMAGE, DURATION, CREATED) VALUES(?,?,?,?,?,?,?,?)";
     static final String BASIC_URL = "https://www.otodom.pl/pl/oferty/sprzedaz/mieszkanie/katowice?priceMin=300000&priceMax=480000&roomsNumber=%5BTHREE%5D&PAGE=11&limit=50&page=";
 
 
     public static void main(String[] args) throws SQLException, IOException {
         JdbcDataSource ds = new JdbcDataSource();
-        ds.setUrl("jdbc:h2:/C:/Users/domin/Desktop/h2o/h2owy/realestate.db;DB_CLOSE_ON_EXIT=FALSE");
+        ds.setUrl("jdbc:h2:/C:/Users/domin/Desktop/h2o/h2owy/nation.db");
         ds.setUser("sa");
         ds.setPassword("sa");
 
@@ -27,13 +29,14 @@ public class Main {
         try {
             DataBase.createSchema(conn);
         } catch (Exception ex) {
-            System.out.println("This database already exists!");
+            System.out.println("ex.getMessage(): " + ex.getMessage());
+            ex.printStackTrace();
         }
 
 
 
         int id = 1;
-        long durationSum = 0;
+        int durationSum = 0;
         ArrayList<Result> list = new ArrayList<>();
 
         WebsiteInfo webInfo = new WebsiteInfo();
@@ -94,16 +97,14 @@ public class Main {
                 Date endDate = new Date();
                 long endTime = endDate.getTime();
                 duration = endTime - startTime;
-                durationSum = durationSum + duration;
+                durationSum = (int) (durationSum + duration);
 
-                if(!rooms.equals("3")) {
-                    System.out.println(title);
-                    System.out.println(rooms);
-                    System.out.println(location);
-                }
 
             try {
                 if (!price.equals("0")) {
+                    Date now = new Date();
+                    SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                    String dateString = formatDate.format(now);
                     result.setId(id);
                     result.setTitle(title);
                     result.setLocation(location);
@@ -111,14 +112,12 @@ public class Main {
                     result.setRooms(Integer.parseInt(rooms));
                     result.setSquareMeters(Float.parseFloat(squareMeters));
                     result.setImage(image);
-                    result.setDate(startDate);
-                    result.setDuration(duration);
+                    result.setDate(dateString);
+                    result.setDuration((int) duration);
                     System.out.println(result);
                     id++;
 
                     list.add(result);
-
-                    DataBase.addValues(conn, result);
 
                 }
             } catch(Exception ex) {
@@ -127,11 +126,26 @@ public class Main {
                 }
             }
         }
+
+
+        for(Result result : list) {
+            PreparedStatement addValues = conn.prepareStatement(INSERT_INTO);
+            insertResultData(addValues, result);
+        }
         conn.close();
+
     }
 
-    public static void insertData(Connection conn) throws SQLException {
-
+    public static void insertResultData(PreparedStatement ps, Result result) throws SQLException {
+        ps.setString(1, result.getTitle());
+        ps.setString(2, result.getLocation());
+        ps.setBigDecimal(3, result.getPrice());
+        ps.setInt(4, result.getRooms());
+        ps.setFloat(5, result.getSquareMeters());
+        ps.setString(6, result.getImage());
+        ps.setInt(7, result.getDuration());
+        ps.setString(8, result.getDateString());
+        ps.executeUpdate();
     }
 
 }

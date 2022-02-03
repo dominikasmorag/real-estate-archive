@@ -1,6 +1,6 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import org.h2.message.DbException;
+
+import java.sql.*;
 import java.util.UUID;
 
 class DataBase {
@@ -14,7 +14,9 @@ class DataBase {
             "PRICE DECIMAL(10)," +
             "ROOMS INT(5)," +
             "SQUAREMETERS DECIMAL(10)," +
-            "IMAGE VARCHAR(500))";
+            "IMAGE VARCHAR(500)," +
+            "DURATION VARCHAR(10)," +
+            "CREATED VARCHAR(50));";
 
     private static void createResultsTable(Connection conn) throws SQLException {
         PreparedStatement createResults = conn.prepareStatement(CREATE_RESULTS);
@@ -25,16 +27,6 @@ class DataBase {
         createResultsTable(conn);
     }
 
-    public static void addValues(Connection conn, Result result) throws SQLException {
-        PreparedStatement statement = conn.prepareStatement("INSERT INTO RESULTS(TITLE, LOCATION, PRICE, ROOMS, SQUAREMETERS, IMAGE) VALUES(?,?,?,?,?,?)");
-        statement.setString(1, result.title);
-        statement.setString(2, result.location);
-        statement.setBigDecimal(3, result.price);
-        statement.setInt(4, result.rooms);
-        statement.setFloat(5, result.squareMeters);
-        statement.setString(6, result.image);
-        statement.executeUpdate();
 
-    }
 }
 
