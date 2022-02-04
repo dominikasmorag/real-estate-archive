@@ -3,16 +3,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 
 public class Main {
 
@@ -57,6 +53,7 @@ public class Main {
             Document doc = Jsoup.connect(url[i]).timeout(6000).get();
 
             Element body = doc.getElementsByAttributeValue("data-cy", "search.listing").last();
+            assert body != null;
             Elements selectedElements = body.select("li");
             for (Element e : selectedElements) {
                 Date startDate = new Date();
@@ -84,7 +81,8 @@ public class Main {
                     rooms = e.select("span").get(2).text();
                 }
 
-                rooms = rooms.replaceAll(" pokoje", "");
+                rooms = rooms.replaceAll(" pokoje",
+                        "");
 
                 squareMeters = e.select("span").get(2).text();
                 if (squareMeters.contains("pokoje")) {
@@ -92,8 +90,11 @@ public class Main {
                 }
 
 
-                rooms = rooms.replaceAll(" pokoje", "");
-                squareMeters = squareMeters.replaceAll(" m²", "");
+                rooms = rooms.replaceAll(" pokoje",
+                        "");
+
+                squareMeters = squareMeters.replaceAll(" m²",
+                        "");
 
                 image = e.select("source").attr("srcset");
 
@@ -117,7 +118,6 @@ public class Main {
                     result.setImage(image);
                     result.setDate(dateString);
                     result.setDuration((int) duration);
-                    //System.out.println(result);
                     id++;
 
                     list.add(result);
@@ -136,6 +136,8 @@ public class Main {
         for(Result result : list) {
             resultDAO.saveResult(result);
         }
+
+       resultDAO.selectAll(conn);
 
         conn.close();
 

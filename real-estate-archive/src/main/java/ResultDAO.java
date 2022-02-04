@@ -1,10 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.math.BigDecimal;
+import java.sql.*;
 import java.util.Scanner;
 
 public class ResultDAO {
@@ -32,7 +30,6 @@ public class ResultDAO {
                 "DURATION, " +
                 "CREATED) " +
                 "VALUES(?,?,?,?,?,?,?,?);");
-
     }
 
     public void saveResult(Result result) throws SQLException {
@@ -48,8 +45,23 @@ public class ResultDAO {
 
     }
     public void selectAll(Connection connection) throws SQLException, FileNotFoundException {
-        this.connection = connection;
-        this.selectAllStatement = connection.prepareStatement("SELECT * FROM RESULTS WHERE LOCATION LIKE '%Ceglana%';");
+        String query = "SELECT * FROM RESULTS;";
+        try (Statement stmt = connection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            while(rs.next()) {
+                String title = rs.getString(1);
+                String location = rs.getString(2);
+                BigDecimal price = rs.getBigDecimal(3);
+                int rooms = rs.getInt(4);
+                float sqm = rs.getFloat(5);
+                String image = rs.getString(6);
+                int duration = rs.getInt(7);
+                String date = rs.getString(8);
 
+                System.out.println(title + " " + location + " " + price + " " + rooms + " " + sqm + " " + image + " " + duration + " " + date + "\n\n");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
