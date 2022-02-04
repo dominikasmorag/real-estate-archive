@@ -1,9 +1,6 @@
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.*;
-import java.util.Scanner;
 
 public class ResultDAO {
 
