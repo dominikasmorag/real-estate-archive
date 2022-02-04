@@ -3,28 +3,31 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Main {
 
-    PreparedStatement addValues = null;
-    static final String INSERT_INTO = "INSERT INTO RESULTS(TITLE, LOCATION, PRICE, ROOMS, SQUAREMETERS, IMAGE, DURATION, CREATED) VALUES(?,?,?,?,?,?,?,?)";
     static final String BASIC_URL = "https://www.otodom.pl/pl/oferty/sprzedaz/mieszkanie/katowice?priceMin=300000&priceMax=480000&roomsNumber=%5BTHREE%5D&PAGE=11&limit=50&page=";
 
 
     public static void main(String[] args) throws SQLException, IOException {
         JdbcDataSource ds = new JdbcDataSource();
-        ds.setUrl("jdbc:h2:/C:/Users/domin/Desktop/h2o/h2owy/nation.db");
+        ds.setUrl("jdbc:h2:/C:/Users/domin/Desktop/h2o/h2owy/labadabadu.db");
         ds.setUser("sa");
         ds.setPassword("sa");
 
 
-            Connection conn = ds.getConnection();
+
+        Connection conn = ds.getConnection();
 
         try {
             DataBase.createSchema(conn);
@@ -114,38 +117,28 @@ public class Main {
                     result.setImage(image);
                     result.setDate(dateString);
                     result.setDuration((int) duration);
-                    System.out.println(result);
+                    //System.out.println(result);
                     id++;
 
                     list.add(result);
 
                 }
-            } catch(Exception ex) {
-                   System.out.println("ex.getMessage() = " + ex.getMessage());
-                   ex.printStackTrace();
-                }
+                } catch(Exception ex) {
+                System.out.println("ex.getMessage() = " + ex.getMessage());
+                ex.printStackTrace();
+            }
+
             }
         }
 
+        ResultDAO resultDAO = new ResultDAO(conn);
 
         for(Result result : list) {
-            PreparedStatement addValues = conn.prepareStatement(INSERT_INTO);
-            insertResultData(addValues, result);
+            resultDAO.saveResult(result);
         }
+
         conn.close();
 
-    }
-
-    public static void insertResultData(PreparedStatement ps, Result result) throws SQLException {
-        ps.setString(1, result.getTitle());
-        ps.setString(2, result.getLocation());
-        ps.setBigDecimal(3, result.getPrice());
-        ps.setInt(4, result.getRooms());
-        ps.setFloat(5, result.getSquareMeters());
-        ps.setString(6, result.getImage());
-        ps.setInt(7, result.getDuration());
-        ps.setString(8, result.getDateString());
-        ps.executeUpdate();
     }
 
 }

@@ -1,7 +1,4 @@
-import org.h2.message.DbException;
-
 import java.sql.*;
-import java.util.UUID;
 
 class DataBase {
 
