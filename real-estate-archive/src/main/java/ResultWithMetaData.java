@@ -2,6 +2,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class ResultWithMetaData {
+    private int id;
     private String title;
     private String location;
     private BigDecimal price;
@@ -11,6 +12,7 @@ public class ResultWithMetaData {
     private int duration;
     private Timestamp timestamp;
 
+    void setId(int id) { this.id = id; }
     void setTitle(String title) { this.title = title; }
     void setLocation(String location) { this.location = location; }
     void setPrice(BigDecimal price) { this.price = price; }
@@ -21,6 +23,7 @@ public class ResultWithMetaData {
     void setTimestamp(Timestamp timestamp) { this.timestamp = timestamp; }
 
 
+    int getId() { return id; }
     String getTitle() {
         return title;
     }

@@ -11,6 +11,7 @@ public class ResultDAO {
     private final int IMAGE = 5;
     private final int DURATION = 6;
     private final int DATE = 7;
+    private final int TIMESTAMP = 8;
 
     public ResultDAO(Connection connection) throws SQLException {
         this.connection = connection;
@@ -26,7 +27,7 @@ public class ResultDAO {
                 "VALUES(?,?,?,?,?,?,?,?);");
     }
 
-    public void saveResult(ResultWithMetaData result) throws SQLException {
+    public void saveResultToFile(ResultWithMetaData result) throws SQLException {
         insertStatement.setString(1, result.getTitle());
         insertStatement.setString(2, result.getLocation());
         insertStatement.setBigDecimal(3, result.getPrice());
