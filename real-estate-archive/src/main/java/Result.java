@@ -40,11 +40,12 @@ public class Result {
                     location = e.select("p").attr("title");
                     result.location = location.replaceAll("Mieszkanie na sprzedaż: ", "");
 
-                    price = e.select("p").last().text().replaceAll("[ zł]", "");
+                    price = e.select("p").get(1).text().replaceAll("[ zł]", "");
                     result.price = price.replaceAll(",", ".");
                     if (price.equalsIgnoreCase("zapytaj o cenę") || price.equalsIgnoreCase("zapytajocenę")) {
                         result.price = "0";
                     }
+
 
                     rooms = e.select("span").get(1).text();
                     if (rooms.trim().equals(result.location.trim())) {
