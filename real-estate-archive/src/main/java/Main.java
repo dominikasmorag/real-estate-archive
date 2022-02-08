@@ -1,7 +1,6 @@
 import org.h2.jdbcx.JdbcDataSource;
 import java.io.IOException;
 import java.sql.*;
-import java.util.Scanner;
 
 public class Main {
 

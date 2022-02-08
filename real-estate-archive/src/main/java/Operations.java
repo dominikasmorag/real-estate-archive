@@ -1,5 +1,4 @@
 import javax.json.*;
-import javax.json.stream.JsonGenerator;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -55,8 +54,6 @@ public class Operations {
                     System.out.println("html report generated");
                 } catch (SQLException | IOException ex) {
                     ex.printStackTrace();
-                } finally {
-                    conn.close();
                 }
                 continue;
             }
@@ -67,8 +64,6 @@ public class Operations {
                     System.out.println("json report generated");
                 } catch (SQLException | IOException ex) {
                     ex.printStackTrace();
-                } finally {
-                    conn.close();
                 }
                 continue;
             }

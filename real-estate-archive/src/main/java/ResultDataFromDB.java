@@ -7,11 +7,11 @@ import java.util.ArrayList;
 public class ResultDataFromDB extends ResultWithMetaData {
     private Connection conn;
     private ResultSet rs;
-    private Statement statement;
     static ArrayList<ResultWithMetaData> listToTable = new ArrayList<>();
 
-    public void printData(Connection conn) throws SQLException, NumberFormatException {
+    protected void printData(Connection conn) throws SQLException, NumberFormatException {
         this.conn = conn;
+        Statement statement;
         statement = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
         rs = statement.executeQuery("SELECT * FROM results;");
         while(rs.next()){
