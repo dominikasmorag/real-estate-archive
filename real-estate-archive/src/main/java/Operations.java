@@ -122,8 +122,8 @@ public class Operations {
                 objectsList.add(jsonObject);
             }
 
-            for (int i = 0; i < objectsList.size(); i++) {
-                pw.println(objectsList.get(i));
+            for (JsonObject jsonObject : objectsList) {
+                pw.println(jsonObject);
             }
 
         } catch (JsonException ex) {

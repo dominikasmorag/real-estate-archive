@@ -7,8 +7,6 @@ import java.io.IOException;
 public class Website {
     static final String BASIC_URL = "https://www.otodom.pl/pl/oferty/sprzedaz/mieszkanie/katowice?priceMin=300000&priceMax=480000&roomsNumber=%5BTHREE%5D&PAGE=11&limit=50&page=";
     public static int pages;
-    public String[] url = new String[pages];
-
 
 
     public static int getPages() throws IOException {
@@ -23,13 +21,6 @@ public class Website {
         return pages;
     }
 
-    public String[] getAllUrl() throws IOException {
-        int pages = Website.getPages();
-        for (int i = 0; i < pages; i++) {
-            url[i] = BASIC_URL + (i + 1);
-        }
-        return url;
-    }
 
 
 

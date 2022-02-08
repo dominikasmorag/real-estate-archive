@@ -4,14 +4,7 @@ public class ResultDAO {
 
     PreparedStatement insertStatement;
     Connection connection;
-    private final int TITLE = 1;
-    private final int LOCATION = 2;
-    private final int ROOMS = 3;
-    private final int SQUARE_METERS = 4;
-    private final int IMAGE = 5;
-    private final int DURATION = 6;
-    private final int DATE = 7;
-    private final int TIMESTAMP = 8;
+
 
     public ResultDAO(Connection connection) throws SQLException {
         this.connection = connection;
