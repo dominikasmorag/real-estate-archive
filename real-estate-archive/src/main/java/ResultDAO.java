@@ -4,10 +4,10 @@ import java.util.ArrayList;
 public class ResultDAO {
     private final PreparedStatement insertStatement;
     private Statement getDataStatement;
-    private Connection connection;
+    private final Connection connection;
     private ResultSet rs;
 
-    public ResultDAO (Connection connection) throws SQLException {
+    public ResultDAO(Connection connection) throws SQLException {
         this.connection = connection;
         this.insertStatement = connection.prepareStatement("INSERT INTO RESULTS(" +
                 "TITLE, " +

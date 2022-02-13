@@ -12,9 +12,13 @@ public class ExportCommand implements Command {
         this.exportArg = exportArg;
     }
 
-    public void execute() throws SQLException {
+    public void execute() {
         ExportStrategy exportStrategy = getExportStrategy(exportArg);
-        exportStrategy.export(resultDAO.selectAll());
+        try {
+            exportStrategy.export(resultDAO.selectAll());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private ExportStrategy getExportStrategy(String exportArg) {
