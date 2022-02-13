@@ -26,8 +26,9 @@ public class Main {
             resultDAO.saveResultToFile(rsvm);
         }
 
-        ShowDataCommand sdt = new ShowDataCommand(resultDAO);
-        sdt.execute();
+        UseCommands useCommands = new UseCommands(resultDAO);
+        useCommands.execute();
+
 
     }
 }

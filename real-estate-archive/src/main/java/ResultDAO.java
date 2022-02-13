@@ -36,7 +36,7 @@ public class ResultDAO {
     public ArrayList<ResultWithMetaData> selectAll() throws SQLException, NumberFormatException {
         ArrayList<ResultWithMetaData> resultDaoList = new ArrayList<>();
         this.getDataStatement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        this.rs = getDataStatement.executeQuery("SELECT * FROM results;");
+        this.rs = getDataStatement.executeQuery("SELECT * FROM results LIMIT 1000;");
         while(rs.next()){
             ResultWithMetaData temporaryResult = new ResultWithMetaData();
             temporaryResult.setId(rs.getInt(1));

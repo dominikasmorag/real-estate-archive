@@ -45,6 +45,6 @@ public class ResultWithMetaData {
     Timestamp getTimestamp() { return timestamp; }
 
     public String toString() {
-        return "Title: " + title + "\nLocation: " + location + "\nPrice: " + price + "\nRooms: " + rooms + "\nSquare meters: " + squareMeters + "\nImage: " + image + "\nDuration: " + duration + "\nDate: " + timestamp  + "\n====";
+        return "Id: " + id + "\nTitle: " + title + "\nLocation: " + location + "\nPrice: " + price + "\nRooms: " + rooms + "\nSquare meters: " + squareMeters + "\nImage: " + image + "\nDuration: " + duration + "\nDate: " + timestamp  + "\n====";
     }
 }
