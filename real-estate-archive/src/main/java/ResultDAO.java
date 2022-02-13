@@ -1,12 +1,13 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ResultDAO {
+    private final PreparedStatement insertStatement;
+    private Statement getDataStatement;
+    private Connection connection;
+    private ResultSet rs;
 
-    PreparedStatement insertStatement;
-    Connection connection;
-
-
-    public ResultDAO(Connection connection) throws SQLException {
+    public ResultDAO (Connection connection) throws SQLException {
         this.connection = connection;
         this.insertStatement = connection.prepareStatement("INSERT INTO RESULTS(" +
                 "TITLE, " +
@@ -30,7 +31,26 @@ public class ResultDAO {
         insertStatement.setInt(7, result.getDuration());
         insertStatement.setTimestamp(8, result.getTimestamp());
         insertStatement.executeUpdate();
+    }
 
+    public ArrayList<ResultWithMetaData> selectAll() throws SQLException, NumberFormatException {
+        ArrayList<ResultWithMetaData> resultDaoList = new ArrayList<>();
+        this.getDataStatement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        this.rs = getDataStatement.executeQuery("SELECT * FROM results;");
+        while(rs.next()){
+            ResultWithMetaData temporaryResult = new ResultWithMetaData();
+            temporaryResult.setId(rs.getInt(1));
+            temporaryResult.setTitle(rs.getString(2));
+            temporaryResult.setLocation(rs.getString(3));
+            temporaryResult.setPrice(rs.getBigDecimal(4));
+            temporaryResult.setRooms(rs.getInt(5));
+            temporaryResult.setSquareMeters(rs.getFloat(6));
+            temporaryResult.setImage(rs.getString(7));
+            temporaryResult.setDuration(rs.getInt(8));
+            temporaryResult.setTimestamp(rs.getTimestamp(9));
+            resultDaoList.add(temporaryResult);
+        }
+        return resultDaoList;
     }
 
 }

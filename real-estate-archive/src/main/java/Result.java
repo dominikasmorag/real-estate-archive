@@ -24,7 +24,7 @@ public class Result {
     }
         private void getAllMetaData() throws IOException {
             for (int i = 0; i < Website.getPages(); i++) {
-                Document doc = Jsoup.connect(Website.BASIC_URL + (i + 1)).timeout(6000).get();
+                Document doc = Jsoup.connect(Website.BASIC_URL + (i + 1)).timeout(10 * 1000).get();
                 Element body = doc.getElementsByAttributeValue("data-cy", "search.listing").last();
                 assert body != null;
                 Elements selectedElements = body.select("li");

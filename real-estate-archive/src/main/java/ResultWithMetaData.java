@@ -22,7 +22,6 @@ public class ResultWithMetaData {
     void setDuration(int duration) { this.duration = duration; }
     void setTimestamp(Timestamp timestamp) { this.timestamp = timestamp; }
 
-
     int getId() { return id; }
     String getTitle() {
         return title;
@@ -44,7 +43,6 @@ public class ResultWithMetaData {
     }
     int getDuration() { return duration; }
     Timestamp getTimestamp() { return timestamp; }
-
 
     public String toString() {
         return "Title: " + title + "\nLocation: " + location + "\nPrice: " + price + "\nRooms: " + rooms + "\nSquare meters: " + squareMeters + "\nImage: " + image + "\nDuration: " + duration + "\nDate: " + timestamp  + "\n====";
