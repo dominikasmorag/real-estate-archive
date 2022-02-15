@@ -1,7 +1,7 @@
 public class CommandFactory {
 
-    public static void createCommand(String input, ResultDAO resultDAO) {
-        getCommand(input, resultDAO);
+    public static Command createCommand(String input, ResultDAO resultDAO) {
+        return getCommand(input, resultDAO);
     }
 
     private static Command getCommand(String input, ResultDAO resultDAO) {
@@ -9,6 +9,7 @@ public class CommandFactory {
             String[] splitter = input.split("\\s");
             input = splitter[1];
             return new ExportCommand(resultDAO, input);
+
         }
         if(input.equals("show-data")) {
             return new ShowDataCommand(resultDAO);

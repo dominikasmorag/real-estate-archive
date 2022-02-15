@@ -26,7 +26,8 @@ public class Main {
             resultDAO.saveResultToFile(rsvm);
         }
 
-        CommandFactory.createCommand("show-data", resultDAO);
+        Command c = CommandFactory.createCommand("show-data", resultDAO);
+        c.execute();
     }
 }
 
