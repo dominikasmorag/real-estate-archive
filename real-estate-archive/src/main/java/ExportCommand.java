@@ -1,6 +1,5 @@
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class ExportCommand implements Command {
     private final ResultDAO resultDAO;
@@ -15,7 +14,7 @@ public class ExportCommand implements Command {
     public void execute() {
         ExportStrategy exportStrategy = getExportStrategy(exportArg);
         try {
-            exportStrategy.export(resultDAO.selectAll());
+            exportStrategy.export(this.resultDAO.selectAll());
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

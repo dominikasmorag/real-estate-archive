@@ -40,10 +40,10 @@ public class UseCommands implements Command {
                     ex.printStackTrace();
                 }
             }
+
             if (userInput.equals("exit")) {
                 return;
             }
-
             else  {
                 throw new IllegalArgumentException("command has to start with - generate-report");
             }
