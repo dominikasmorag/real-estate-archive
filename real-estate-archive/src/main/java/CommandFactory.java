@@ -1,17 +1,16 @@
 public class CommandFactory {
 
-    public static Command createCommand(String input, ResultDAO resultDAO) {
-        return getCommand(input, resultDAO);
+    public static Command createCommand(String userInput, ResultDAO resultDAO) {
+        return getCommand(userInput, resultDAO);
     }
 
-    private static Command getCommand(String input, ResultDAO resultDAO) {
-        if(input.startsWith("generate-report")) {
-            String[] splitter = input.split("\\s");
-            input = splitter[1];
-            return new ExportCommand(resultDAO, input);
-
+    private static Command getCommand(String userInput, ResultDAO resultDAO) {
+        if(userInput.startsWith("generate-report")) {
+            String[] splitter = userInput.split("\\s");
+            userInput = splitter[1];
+            return new ExportCommand(resultDAO, userInput);
         }
-        if(input.equals("show-data")) {
+        if(userInput.equals("show-data")) {
             return new ShowDataCommand(resultDAO);
         }
         return null;
