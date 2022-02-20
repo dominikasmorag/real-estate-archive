@@ -1,19 +1,17 @@
+import command.realestate.*;
+import database.realestate.ResultDAO;
+
 import java.util.Scanner;
 
-public class UseCommands implements Command {
+public class ProgramController {
     ResultDAO resultDAO;
 
-    public UseCommands(ResultDAO resultDAO) {
+    ProgramController(ResultDAO resultDAO) {
         this.resultDAO = resultDAO;
     }
 
-    @Override
-    public void execute() {
-        try {
-            showCommands();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+    public void showAllCommands() {
+        showCommands();
     }
 
     private void showCommands() throws IllegalArgumentException, NullPointerException {
@@ -31,7 +29,7 @@ public class UseCommands implements Command {
                     Command command = CommandFactory.createCommand(userInput, resultDAO);
                     command.execute();
                 }
-            } catch (IllegalArgumentException | NullPointerException ex) {
+            } catch (IllegalArgumentException | NullPointerException | ArrayIndexOutOfBoundsException ex) {
                 ex.printStackTrace();
             }
         }

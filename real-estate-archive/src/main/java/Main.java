@@ -1,4 +1,9 @@
+import database.realestate.DataBase;
+import database.realestate.ResultDAO;
 import org.h2.jdbcx.JdbcDataSource;
+import web.realestate.Result;
+import web.realestate.ResultWithMetaData;
+
 import java.sql.*;
 
 public class Main {
@@ -26,8 +31,8 @@ public class Main {
             resultDAO.saveResultToFile(rsvm);
         }
 
-        UseCommands u = new UseCommands(resultDAO);
-        u.execute();
+        ProgramController u = new ProgramController(resultDAO);
+        u.showAllCommands();
     }
 }
 

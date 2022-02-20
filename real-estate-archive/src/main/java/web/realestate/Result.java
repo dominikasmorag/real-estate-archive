@@ -1,3 +1,5 @@
+package web.realestate;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -9,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Result {
-    ArrayList<ResultWithMetaData> listOfResults = new ArrayList<>();
+    public ArrayList<ResultWithMetaData> listOfResults = new ArrayList<>();
     private String title;
     private String location;
     private String price;
@@ -23,7 +25,8 @@ public class Result {
         getAllMetaData();
     }
         private void getAllMetaData() throws IOException {
-            for (int i = 0; i < Website.getPages(); i++) {
+        int pages = Website.getPages();
+            for (int i = 0; i < pages; i++) {
                 Document doc = Jsoup.connect(Website.BASIC_URL + (i + 1)).timeout(10 * 1000).get();
                 Element body = doc.getElementsByAttributeValue("data-cy", "search.listing").last();
                 assert body != null;

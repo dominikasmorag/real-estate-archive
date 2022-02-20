@@ -1,3 +1,7 @@
+package command.realestate;
+
+import web.realestate.ResultWithMetaData;
+
 import javax.json.Json;
 import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
@@ -7,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class JSONExportStrategy implements ExportStrategy {
+class JSONExportStrategy implements ExportStrategy {
 
     public JSONExportStrategy() {
 

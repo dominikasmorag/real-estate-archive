@@ -1,3 +1,7 @@
+package command.realestate;
+
+import database.realestate.ResultDAO;
+
 public class CommandFactory {
 
     public static Command createCommand(String userInput, ResultDAO resultDAO) {

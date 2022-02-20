@@ -1,8 +1,12 @@
+package command.realestate;
+
+import web.realestate.ResultWithMetaData;
+
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;
 
-public class HTMLExportStrategy implements ExportStrategy {
+class HTMLExportStrategy implements ExportStrategy {
         private final String HTML_BEGINNING = "<html>" +
                 "<head>" +
                 "<style>" +

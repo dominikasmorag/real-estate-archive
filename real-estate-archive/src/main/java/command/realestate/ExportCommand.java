@@ -1,7 +1,11 @@
+package command.realestate;
+
+import database.realestate.ResultDAO;
+
 import java.sql.SQLException;
 import java.util.HashMap;
 
-public class ExportCommand implements Command {
+class ExportCommand implements Command {
     private final ResultDAO resultDAO;
     private final String exportArg;
     private final HashMap<String, ExportStrategy> commandsMap = initializeCommands();

@@ -1,6 +1,8 @@
+package database.realestate;
+
 import java.sql.*;
 
-class DataBase {
+public class DataBase {
 
 
     private static final String RESULTS_TABLE = "RESULTS";

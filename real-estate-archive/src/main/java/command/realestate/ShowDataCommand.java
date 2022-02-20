@@ -1,7 +1,12 @@
+package command.realestate;
+
+import database.realestate.ResultDAO;
+import web.realestate.ResultWithMetaData;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ShowDataCommand implements Command {
+class ShowDataCommand implements Command {
     private final ResultDAO resultDAO;
 
     public ShowDataCommand(ResultDAO resultDAO) {
@@ -20,6 +25,8 @@ public class ShowDataCommand implements Command {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        list.forEach(System.out::println);
+        if (list != null) {
+            list.forEach(System.out::println);
+        }
     }
 }
