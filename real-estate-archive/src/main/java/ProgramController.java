@@ -1,5 +1,7 @@
 import command.realestate.*;
-import database.realestate.ResultDAO;
+import realestate.command.Command;
+import realestate.command.CommandFactory;
+import realestate.database.ResultDAO;
 
 import java.util.Scanner;
 

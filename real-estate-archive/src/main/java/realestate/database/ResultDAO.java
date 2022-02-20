@@ -1,6 +1,6 @@
-package database.realestate;
+package realestate.database;
 
-import web.realestate.ResultWithMetaData;
+import realestate.web.ResultWithMetaData;
 
 import java.sql.*;
 import java.util.ArrayList;

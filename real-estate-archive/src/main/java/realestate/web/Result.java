@@ -1,4 +1,4 @@
-package web.realestate;
+package realestate.web;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

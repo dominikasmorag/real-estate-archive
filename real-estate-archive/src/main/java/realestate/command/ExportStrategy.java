@@ -1,5 +1,5 @@
-package command.realestate;
-import web.realestate.ResultWithMetaData;
+package realestate.command;
+import realestate.web.ResultWithMetaData;
 import java.util.List;
 
 interface ExportStrategy {

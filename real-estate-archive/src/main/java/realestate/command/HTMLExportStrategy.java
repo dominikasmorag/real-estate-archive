@@ -1,6 +1,6 @@
-package command.realestate;
+package realestate.command;
 
-import web.realestate.ResultWithMetaData;
+import realestate.web.ResultWithMetaData;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;

@@ -1,7 +1,7 @@
-package command.realestate;
+package realestate.command;
 
-import database.realestate.ResultDAO;
-import web.realestate.ResultWithMetaData;
+import realestate.database.ResultDAO;
+import realestate.web.ResultWithMetaData;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

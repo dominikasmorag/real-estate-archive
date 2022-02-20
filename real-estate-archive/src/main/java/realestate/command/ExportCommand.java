@@ -1,6 +1,6 @@
-package command.realestate;
+package realestate.command;
 
-import database.realestate.ResultDAO;
+import realestate.database.ResultDAO;
 
 import java.sql.SQLException;
 import java.util.HashMap;

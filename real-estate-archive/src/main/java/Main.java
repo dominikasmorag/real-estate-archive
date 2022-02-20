@@ -1,8 +1,8 @@
-import database.realestate.DataBase;
-import database.realestate.ResultDAO;
+import realestate.database.DataBase;
+import realestate.database.ResultDAO;
 import org.h2.jdbcx.JdbcDataSource;
-import web.realestate.Result;
-import web.realestate.ResultWithMetaData;
+import realestate.web.Result;
+import realestate.web.ResultWithMetaData;
 
 import java.sql.*;
 

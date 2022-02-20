@@ -1,4 +1,4 @@
-package web.realestate;
+package realestate.web;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;

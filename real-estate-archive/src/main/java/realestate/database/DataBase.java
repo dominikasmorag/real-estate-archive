@@ -1,4 +1,4 @@
-package database.realestate;
+package realestate.database;
 
 import java.sql.*;
 
